@@ -1,0 +1,46 @@
+---
+title: "NA Values in R"
+author: "Emeka Nwosu"
+date: "August 3, 2016"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I read an excellent post on R-Bloggers about understanding NA values in R. I'm just going to expand upon it slightly and summarize is a bit. The original article can be found [here](https://www.r-bloggers.com/the-trick-to-understanding-nas-missing-values-in-r/)
+
+
+## NA Values as Numbers
+```{r}
+NA^0
+NA^2
+0^0
+0^2
+```
+Any positive or negative number raised to the 0 equals 1. Even 0 raised to the 0 equals 1. So NA can be thought of as a placeholder for some integer that we do not know. If you look in the example, NA^2 = NA because the value of (placeholder)^2 varies depending on what the placeholder is, but (placeholder)^0 = 1 regardless of what is in there.
+
+## NA Values as Logical Statements
+```{r }
+FALSE || TRUE
+FALSE & TRUE
+```
+"||" = or  
+"&" = and  
+
+* FALSE || True = True: Only one statement needs to be for the result to be true  
+* FALSE & TRUE = FALSE: Both statements need to be true for the result to be true  
+
+```{r}
+NA || TRUE
+NA || FALSE
+NA & TRUE
+NA & FALSE
+```
+Remember that NA is a placeholder. It could equal any of the possible outcomes (TRUE and FALSE). So each statement has to work out for both possibilities.
+
+* NA || TRUE = TRUE: Only one statement needs to be true and that is already satisfied
+* NA || FALSE = NA: The result changes based on the value of NA. TRUE produces a true result and False produces a false result
+* NA & TRUE = NA: The result changes based on the value of NA. TRUE produces a true result and False produces a false result
+* NA & FALSE = FALSE: FALSE & FALSE = FALSE and TRUE & FALSE = FALSE. The same result is produced regardless of the value of NA.
